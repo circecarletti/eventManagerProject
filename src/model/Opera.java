@@ -1,7 +1,5 @@
 package model;
 
-import java.util.TreeSet;
-
 public class Opera extends EntertainmentEvent {
 	protected String style;
 
@@ -22,12 +20,10 @@ public class Opera extends EntertainmentEvent {
 		return "Opera [style=" + style + ", date=" + date + ", capacity=" + capacity + "]";
 	}
 	
-	public boolean isIn(TreeSet<Opera> operaConcerts) {
-		for (Opera concert : operaConcerts) {
-			if (this.compareTo(concert) == 1) {
-				return true;
-			}
-		}
-		return false;
+	@Override
+	public String print() {
+		return "[OP]- " + name + ", " + date.toString();
 	}
+	
+
 }

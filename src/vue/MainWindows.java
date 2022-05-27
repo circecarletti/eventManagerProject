@@ -2,108 +2,187 @@ package vue;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.TreeSet;
+import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.TitledBorder;
 
 import model.EntertainmentEventType;
-import model.MyDate;
-import model.Opera;
-import model.RockConcert;
-import model.Theatre;
-
+import model.ListEvent;
 public class MainWindows extends JFrame {
+
+	private static final long serialVersionUID = -701041987776898855L;
 
 	private JPanel contentPane;
 
-	private InventoryPanel inventoryPanel;
 	
-	private AddEventPanel addEventPanel;
+	private boolean selectedTab;
 	
 	private JPanel centerPanel;
+	private JPanel northPanel;
+	private JPanel paneSearchTab;
+	private JPanel paneAddTab;
 	
-	private EntertainmentEventType selectedEvent;
+	private MyFilter myFilter;
+	public GlobalPanel globalPanel;
 	
 	
-	public MainWindows(TreeSet<RockConcert> rockConcerts, TreeSet<Opera> operaConcerts, TreeSet<Theatre> theatreRepresentations) {
+	private JComboBox<String> cbChoiceAdding;
+	private AddEventPanel paneAddEvent;
+
+	public ListEvent rockEvents;
+	public ListEvent operaEvents;
+	public ListEvent theatreEvents;
+
+	
+	
+	public MainWindows() {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1000, 500);
+		setBounds(100, 100, 900, 500);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBorder(BorderFactory.createLineBorder(new Color(10, 10, 10), 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout(5, 10));
+		contentPane.setLayout(new BorderLayout());
+		
+
+
+		rockEvents = new ListEvent(EntertainmentEventType.ROCK);
+		operaEvents = new ListEvent(EntertainmentEventType.OPERA);
+		theatreEvents = new ListEvent(EntertainmentEventType.THEATRE);
+		
+		
+		
+		northPanel = new JPanel();
+		northPanel.setLayout(new GridLayout(1, 2));
+		
+		this.paneAddEvent = new AddEventPanel(rockEvents);
+		
+		
+		paneSearchTab = new JPanel();
+		paneSearchTab.setBackground(new Color(171, 246, 173));
+		JLabel lblSearchTab = new JLabel("Search");
+		paneSearchTab.add(lblSearchTab);
+		paneSearchTab.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				selectedTab = false;
+				updatePanel();
+				centerPanel.setBackground(new Color(171, 246, 173));
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {}
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+			@Override
+			public void mouseExited(MouseEvent e) {}
+		});
+		northPanel.add(paneSearchTab);
+		
+		paneAddTab = new JPanel();
+		paneAddTab.setBackground(new Color(246, 229, 171));
+		paneAddTab.setBorder(BorderFactory.createLineBorder(Color.black));
+		JLabel lblAddTab = new JLabel("Add event");
+		paneAddTab.add(lblAddTab);
+		paneAddTab.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				selectedTab = true;
+				centerPanel.setBackground(new Color(246, 229, 171));
+				updatePanel();
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {}
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+			@Override
+			public void mouseExited(MouseEvent e) {}
+		});
+		northPanel.add(paneAddTab);
+
+		contentPane.add(northPanel, BorderLayout.NORTH);
 		
 		
 		centerPanel = new JPanel();
-		centerPanel.setLayout(new GridLayout(1, 2, 5, 10));
+		centerPanel.setLayout(new BorderLayout(10, 10));
 		contentPane.add(centerPanel);
 		
-	
-		this.selectedEvent = EntertainmentEventType.ROCK;
-		makeInventoryPanel(rockConcerts, operaConcerts, theatreRepresentations);
-		makeAddEventPanel(rockConcerts, operaConcerts, theatreRepresentations);
+		myFilter = new MyFilter(this);
+		globalPanel = new GlobalPanel(this);
+		
 		
 
-		JPanel northPanel = new JPanel();
+		this.selectedTab = false; 
+		centerPanel.setBackground(new Color(171, 246, 173));
 		
-		JLabel lblChoiceEvent = new JLabel("Choose one type of event : ");
-		northPanel.add(lblChoiceEvent);
+		updateCenterPaneOnSearch();
 		
-		String events[] = {"rock concert","opera concert","theatre representation"};        
-		JComboBox<String> choiceOfEvent = new JComboBox<String>(events);
-		choiceOfEvent.addActionListener(new ActionListener() {
+	}
+	
+	private void updatePanel() {
+		if (!this.selectedTab) {
+			this.paneSearchTab.setBorder(BorderFactory.createLineBorder(new Color(171, 246, 173)));
+			this.paneAddTab.setBorder(BorderFactory.createLineBorder(Color.black));
+			updateCenterPaneOnSearch();
+		}else {
+			this.paneSearchTab.setBorder(BorderFactory.createLineBorder(Color.black));
+			this.paneAddTab.setBorder(BorderFactory.createLineBorder(new Color(246, 229, 171)));
+			updateCenterPaneOnAdd();
+		}
+		
+	}
+	
+	private void updateCenterPaneOnAdd() {
+		centerPanel.removeAll();
+		String[] choices = {"rock", "opera", "theatre"};
+		cbChoiceAdding = new JComboBox<String>(choices);
+		cbChoiceAdding.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String choice = (String) choiceOfEvent.getSelectedItem();
-				if (choice.equals("rock concert")) {
-					selectedEvent = EntertainmentEventType.ROCK;
-				}else if (choice.equals("opera concert")) {
-					selectedEvent = EntertainmentEventType.OPERA;
-				}else if (choice.equals("theatre representation")){
-					selectedEvent = EntertainmentEventType.THEATRE;
+				switch ((String)cbChoiceAdding.getSelectedItem()) {
+				case "rock":
+					paneAddEvent.updatePanel(rockEvents);
+					break;
+				case "opera":
+					paneAddEvent.updatePanel(operaEvents);
+					break;
+				case "theatre":
+					paneAddEvent.updatePanel(theatreEvents);				
+					break;
+
+				default:
+					break;
 				}
-				updateCenterPanel(rockConcerts, operaConcerts, theatreRepresentations);
+
 			}
 		});
-		northPanel.add(choiceOfEvent);
-		contentPane.add(northPanel, BorderLayout.NORTH);
-	}
-
-	private void updateCenterPanel(TreeSet<RockConcert> rockConcerts, TreeSet<Opera> operaConcerts, TreeSet<Theatre> theatreRepresentations) {
-		inventoryPanel.updatePanel(rockConcerts, operaConcerts, theatreRepresentations, selectedEvent);
-		addEventPanel.updatePanel(selectedEvent);
-		inventoryPanel.revalidate();
-		inventoryPanel.repaint();
-	}
-
-	private void makeInventoryPanel(TreeSet<RockConcert> rockConcerts, TreeSet<Opera> operaConcerts,
-			TreeSet<Theatre> theatreRepresentations) {
-		inventoryPanel = new InventoryPanel(rockConcerts, operaConcerts, theatreRepresentations, this.selectedEvent);
-		centerPanel.add(inventoryPanel);
+		centerPanel.add(cbChoiceAdding, BorderLayout.NORTH);
+		centerPanel.add(paneAddEvent, BorderLayout.CENTER);
+		centerPanel.revalidate();
+		centerPanel.repaint();
 	}
 
 
-	private void makeAddEventPanel(TreeSet<RockConcert> rockConcerts, TreeSet<Opera> operaConcerts, 
-			TreeSet<Theatre> theatreRepresentations) {
-		this.addEventPanel = new AddEventPanel(rockConcerts,  operaConcerts, theatreRepresentations, this.selectedEvent, inventoryPanel);
-		centerPanel.add(addEventPanel, BorderLayout.CENTER);
+	private void updateCenterPaneOnSearch() {
+		centerPanel.removeAll();
+		
+		centerPanel.add(myFilter,BorderLayout.NORTH);
+		globalPanel.updatePanelAll();
+		centerPanel.add(globalPanel,BorderLayout.CENTER);
+		
+		centerPanel.revalidate();
+		centerPanel.repaint();
 	}
 
 }

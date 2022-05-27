@@ -1,6 +1,4 @@
-package model;
-
-import java.util.TreeSet;
+package model; 
 
 public class Theatre extends EntertainmentEvent{
 	
@@ -16,20 +14,17 @@ public class Theatre extends EntertainmentEvent{
 	 * @param capacity 
 	 * @param name
 	 */
-	public Theatre(String themeScene, String style, MyDate date, int capacity, String name) {
+
+	public Theatre(MyDate date, int capacity, String name, String themeScene, String style) {
 		super(date, capacity, name);
 		this.themeScene = themeScene;
 		this.style = style;
 	}
-
-
-	public boolean isIn(TreeSet<Theatre> representationList) {
-		for (Theatre representation : representationList) {
-			if (this.compareTo(representation) == 1) {
-				return true;
-			}
-		}
-		return false;
+	
+	public String print() {
+		return "[TH]- " + name + ", " + date.toString();
 	}
+
+
 	
 }

@@ -1,7 +1,5 @@
 package model;
 
-import java.util.TreeSet;
-
 public class RockConcert extends EntertainmentEvent {
 	
 	protected String drummer;
@@ -27,18 +25,10 @@ public class RockConcert extends EntertainmentEvent {
 		return "RockConcert [drummer=" + drummer + ", guitarist=" + guitarist + ", date="
 				+ date + ", capacity=" + capacity + ", name=" + name + ", eventID=" + eventID + "]";
 	}
-
-
-
-
-	public boolean isIn(TreeSet<RockConcert> rockConcerts) {
-		for (RockConcert concert : rockConcerts) {
-			if (this.compareTo(concert) == 1) {
-				return true;
-			}
-		}
-		return false;
+	
+	public String print() {
+		return "[RO]- " + name + ", " + date.toString();
 	}
 
-	
+
 }

@@ -1,5 +1,7 @@
 package model;
 
+import java.util.TreeSet;
+
 public class EntertainmentEvent implements Comparable<EntertainmentEvent>{
 	public MyDate date;
 	protected int capacity;
@@ -21,6 +23,11 @@ public class EntertainmentEvent implements Comparable<EntertainmentEvent>{
 	@Override
 	public String toString() {
 		return "EntertainmentEvent [date=" + date + ", capacity=" + capacity + "]";
+	}
+	
+	public String print() {
+		
+		return "- " + name + ", " + date.toString();
 	}
 	
 	
@@ -57,8 +64,6 @@ public class EntertainmentEvent implements Comparable<EntertainmentEvent>{
 		return false;
 	}
 	
-	
-	
 
 	/**
 	 * @param event : the event you want to compare
@@ -66,12 +71,20 @@ public class EntertainmentEvent implements Comparable<EntertainmentEvent>{
 	 */
 	@Override
 	public int compareTo(EntertainmentEvent event) {
-		//System.out.println("compare " + this.eventID + " to " + event.eventID);
 		if(this.eventID == event.eventID) {
 			return 1;
 		} else {
 			return -1;
 		}
+	}
+	
+	public boolean isIn(TreeSet<EntertainmentEvent> event) {
+		for (EntertainmentEvent concert : event) {
+			if (this.compareTo(concert) == 1) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 }

@@ -25,6 +25,14 @@ public class MyDate {
 			this.hour = 0;
 			this.minute = 0;
 	}
+	
+	public MyDate(int year, int month, int day, int hour, int minute) {
+		this.year = year;
+		this.month = month;
+		this.day = day;
+		this.hour = hour;
+		this.minute = minute;
+}
 
 	
 	@Override
@@ -137,10 +145,16 @@ public class MyDate {
 		this.day = -1;
 	}
 	
-	@Override
+	/*
 	public String toString() {
 		return "  " + this.day + "/" + this.month + "/" + this.year + "  " + this.hour + ":" + this.minute;	
+	}*/
+	
+	@Override
+	public String toString() {
+		return String.format("%02d/%02d/%04d %02d:%02d", day, month, year, hour, minute);	
 	}
+	
 	
 	public static boolean leapYear(int year) {
 		if(year % 4 == 0) {
@@ -202,5 +216,8 @@ public class MyDate {
 	}
 
 
+	public boolean dayIsEqual(MyDate date) {
+		return (day == date.day && month == date.month && year == date.year);
+	}
 	
 }
