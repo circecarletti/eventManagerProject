@@ -120,4 +120,14 @@ public class TimePanel extends JPanel{
 		return minute;
 	}
 
+
+
+	public void setHour(int hour) {
+		this.hour = hour;
+	}
+	
+	public void setMinute(int minute) {
+		this.minute = minute;
+	}
+
 }

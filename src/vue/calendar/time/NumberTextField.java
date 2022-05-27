@@ -13,7 +13,6 @@ public class NumberTextField extends JTextField{
 	
 	
 	public NumberTextField(){
-		
 		setDocument(new NumberRestrictedDocument());
 	}
 	
@@ -43,7 +42,7 @@ public class NumberTextField extends JTextField{
 	      if (isParsable(str)) {
 	        super.insertString(offs, str, a);
 	      }
-	    }
+	   }
 	}
 	
 	

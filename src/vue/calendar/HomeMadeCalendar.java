@@ -47,7 +47,6 @@ public class HomeMadeCalendar extends JFrame{
 	private TimePanel timePanel;
 	
 	private MyDate date;
-	@SuppressWarnings("unused")
 	private MyDay myDay;
 
 	public HomeMadeCalendar(MyDay myDay) {
@@ -58,6 +57,7 @@ public class HomeMadeCalendar extends JFrame{
 		
 		this.myDay = myDay;
 		
+
 		
 
 		yearMonthPanel = new YearMonthPanel(this);
@@ -98,7 +98,12 @@ public class HomeMadeCalendar extends JFrame{
 		add(bottomPanel,BorderLayout.SOUTH);
 		
 		
-		setCurrentDate();
+		if(myDay.dayIsEqual(new MyDay(0,0,0))) {
+			setCurrentDate();
+		}
+		else {
+			setDay();
+		}
 		
 		refresh();
 		setVisible(true);
@@ -151,7 +156,14 @@ public class HomeMadeCalendar extends JFrame{
 		
 		add(bottomPanel,BorderLayout.SOUTH);
 		
-		setCurrentDate();
+		
+		
+		if(date.dayIsEqual(new MyDate(0,0,0))) {
+			setCurrentDate();
+		}
+		else {
+			setDate();
+		}
 		
 		refresh();
 		setVisible(true);
@@ -159,6 +171,8 @@ public class HomeMadeCalendar extends JFrame{
 	
 	
 	
+	
+
 	public void setErrorState(ERROR_STATE errorState) {
 		this.errorState = errorState;
 	}
@@ -166,6 +180,21 @@ public class HomeMadeCalendar extends JFrame{
 	public void setErrorState2(ERROR_STATE errorState) {
 		timePanel.setErrorText(errorState);
 	}
+	
+	private void setDay() {
+		yearMonthPanel.setYear(myDay.getYear());
+		yearMonthPanel.setMonth(myDay.getMonth());
+		dayPanel.setday(myDay.getDay());
+	}
+	
+	private void setDate() {
+		yearMonthPanel.setYear(date.getYear());
+		yearMonthPanel.setMonth(date.getMonth());
+		dayPanel.setday(date.getDay());
+		timePanel.setHour(date.getHour());
+		timePanel.setMinute(date.getMinute());
+	}
+	
 	
 	private void setCurrentDate() {
 		yearMonthPanel.setCurrentDate();

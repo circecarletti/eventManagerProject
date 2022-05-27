@@ -22,7 +22,7 @@ public class Opera extends EntertainmentEvent {
 	
 	@Override
 	public String print() {
-		return "[OP]- " + name + ", " + date.toString();
+		return "(opera) " + name + ", " + date.toString();
 	}
 	
 

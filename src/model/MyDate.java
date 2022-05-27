@@ -10,12 +10,6 @@ public class MyDate {
 	
 	
 	public MyDate() {
-		super();
-			this.year = 0;
-			this.month = 1;
-			this.day = 1;
-			this.hour = 0;
-			this.minute = 0;
 	}
 	
 	public MyDate(int year, int month, int day) {

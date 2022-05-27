@@ -22,18 +22,36 @@ public class DayPanel extends JPanel {
 		
 		dayNamePanel = new DayNamePanel(calendar);
 		dayNumberPanel = new DayNumberPanel(calendar);
+		//timePanel = new TimePanel(calendar);
 		
 		add(dayNumberPanel,BorderLayout.CENTER);
 		add(dayNamePanel,BorderLayout.NORTH);
+		//add(timePanel,BorderLayout.SOUTH);
 		
 	
 	}
 	
-
+	/*
+	public void setErrorText(ERROR_STATE errorState ) {
+		timePanel.setErrorText(errorState);
+	}
+	public boolean timeIsValid() {
+		return timePanel.timeIsValid();
+	}
+	
+	public boolean minuteIsValid() {
+		return timePanel.minuteIsValid();
+	}
+	
+	public boolean hourIsValid() {
+		return timePanel.hourIsValid();
+	}
+	*/
 
 	public void refresh() {
 		dayNumberPanel.refresh();
 		dayNamePanel.refresh();
+		//timePanel.refresh();
 	}
 
 	public int getDay() {
@@ -50,6 +68,10 @@ public class DayPanel extends JPanel {
 	public void setCurrentDate() {
 		dayNumberPanel.setCurrentDay();
 		
+	}
+
+	public void setday(int day) {
+		dayNumberPanel.setDay(day);
 	}
 
 

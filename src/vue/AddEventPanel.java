@@ -12,6 +12,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -26,6 +27,7 @@ import model.Opera;
 import model.RockConcert;
 import model.Theatre;
 import vue.calendar.HomeMadeCalendar;
+import vue.calendar.time.NumberTextField;
 
 public class AddEventPanel extends JPanel {
 	
@@ -41,10 +43,11 @@ public class AddEventPanel extends JPanel {
 	
 	public AddEventPanel(ListEvent events) {
 		this.events = events;
+		setBorder(BorderFactory.createLineBorder(Color.black));
 		TitledBorder titlePanel = new TitledBorder("adding event");
 		setBorder(titlePanel);
 		titlePanel.setTitleFont(new Font("Dialog", Font.PLAIN, 12));
-		this.setBackground(new Color(246, 229, 171));
+		this.setBackground(new Color(255, 217, 160));
 
 		this.commonVisualElements = new ArrayList<Component>();
 		addAllEventElements();
@@ -56,6 +59,7 @@ public class AddEventPanel extends JPanel {
 	}
 
 	public void updatePanel(ListEvent events) {
+		this.events = events;
 		for (Component component : specificVisualElements) {
 			this.remove(component);
 		}
@@ -78,7 +82,7 @@ public class AddEventPanel extends JPanel {
 		
 		JLabel lblCapacity = new JLabel("Capacity : ");
 		commonVisualElements.add(lblCapacity);
-		JTextField txtFieldCapacity= new JTextField();
+		NumberTextField txtFieldCapacity= new NumberTextField();
 		commonVisualElements.add(txtFieldCapacity);
 		
 
@@ -134,7 +138,7 @@ public class AddEventPanel extends JPanel {
 	}
 
 	private void addSpecificElementsRock(ListEvent events2) {
-		this.setLayout(new GridLayout(6, 2, 3, 15));
+		this.setLayout(new GridLayout(6, 2, 10, 15));
 		
 		JLabel lblDrummer = new JLabel("Drummer : ");
 		specificVisualElements.add(lblDrummer);
@@ -161,7 +165,7 @@ public class AddEventPanel extends JPanel {
 				String drummer = txtFieldDrummer.getText();
 				String guitarist = txtFieldGuitarist.getText();
 				if (capacity > 0 && !(name.equals("") || (name.equals(" ")))){
-					RockConcert newConcert = new RockConcert(dateNewEvent, capacity, drummer, guitarist, name);
+					RockConcert newConcert = new RockConcert(dateNewEvent, name, capacity, drummer, guitarist);
 					if (!events.addEvent(newConcert)) {
 						JOptionPane.showMessageDialog(null, (name + " are already playing at this date!"), "Error", JOptionPane.ERROR_MESSAGE);
 					} else {
@@ -180,7 +184,7 @@ public class AddEventPanel extends JPanel {
 		
 	
 	private void addSpecificElementsOpera(ListEvent events2) {
-		this.setLayout(new GridLayout(6, 2, 3, 15));
+		this.setLayout(new GridLayout(6, 2, 10, 15));
 		
 		
 		JLabel lblStyle = new JLabel("Style : ");
@@ -219,7 +223,7 @@ public class AddEventPanel extends JPanel {
 	}
 
 	private void addSpecificElementsTheatre(ListEvent events2) {
-		this.setLayout(new GridLayout(6, 2, 3, 15));
+		this.setLayout(new GridLayout(6, 2, 10, 15));
 		
 		MyDate dateNewEvent = new MyDate();
 		

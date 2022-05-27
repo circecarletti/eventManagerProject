@@ -21,7 +21,7 @@ public class MonthPanel extends JPanel {
 	private JButton previousButton = new JButton("<");
 	private JButton nextButton = new JButton(">");
 	private static JLabel monthName = new JLabel("",SwingConstants.CENTER);
-	private int month = 1;
+	private int month;
 	
 	
 	MonthPanel(HomeMadeCalendar calendar){
@@ -76,5 +76,9 @@ public class MonthPanel extends JPanel {
 
 	public void setCurrentMonth() {
 		month = LocalDateTime.now().getMonthValue();
+	}
+
+	public void setMonth(int month) {
+		this.month = month;
 	}
 }

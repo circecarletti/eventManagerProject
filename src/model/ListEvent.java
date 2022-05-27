@@ -7,7 +7,6 @@ public class ListEvent {
 	public TreeSet<EntertainmentEvent> eventList;
 	public EntertainmentEventType eventType;
 	
-	
 	public ListEvent event;
 	
 	public ListEvent(EntertainmentEventType eventType){
@@ -21,11 +20,9 @@ public class ListEvent {
 			{
 				return true;
 			} else {
-				System.out.println("add failure.");
 				return false;
 			}
 		} else {
-			System.out.println("isIn failure.");
 			return false;
 		}
 	}

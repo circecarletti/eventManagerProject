@@ -51,11 +51,11 @@ public class MyFilter extends JPanel {
 		
 		setBackground(COLOR);
 		setLayout(new GridLayout(3,2,0,5));
-		setBorder(BorderFactory.createLineBorder(new Color(171, 246, 173), 10));
 		
 		myDay = new MyDay();
 		
 
+		setBorder(BorderFactory.createLineBorder(COLOR, 5));
 	
 		
 		JPanel subPanel1 = new JPanel();
@@ -63,7 +63,7 @@ public class MyFilter extends JPanel {
 		subPanel1.setLayout(new BorderLayout());
 		
 		JLabel typeLabel = new JLabel("Type : ", SwingConstants.RIGHT);
-		typeLabel.setPreferredSize(new Dimension(jtextLenght,10));
+		typeLabel.setPreferredSize(new Dimension(jtextLenght, 14));
 		subPanel1.add(typeLabel,BorderLayout.WEST);
 		
 		String filters[] = {"All","rock concert","opera concert","theatre"};        
@@ -90,7 +90,7 @@ public class MyFilter extends JPanel {
 		subPanel2.setBackground(COLOR);
 		
 		JLabel nameLabel = new JLabel("Name : ",SwingConstants.RIGHT);
-		nameLabel.setPreferredSize(new Dimension(jtextLenght,10));
+		nameLabel.setPreferredSize(new Dimension(jtextLenght, 14));
 		subPanel2.add(nameLabel, BorderLayout.WEST);
 		
 		nameTextField = new JTextField();
@@ -104,7 +104,7 @@ public class MyFilter extends JPanel {
 		subPanel3.setBackground(COLOR);
 		
 		JLabel dateLabel = new JLabel("Date : ",SwingConstants.RIGHT);
-		dateLabel.setPreferredSize(new Dimension(jtextLenght,10));
+		dateLabel.setPreferredSize(new Dimension(jtextLenght, 14));
 		subPanel3.add(dateLabel, BorderLayout.WEST);
 		
 		JPanel datePanel = new JPanel();
@@ -124,11 +124,11 @@ public class MyFilter extends JPanel {
 				newCalendar.addWindowListener(new WindowListener() {
 					@Override
 					public void windowClosing(WindowEvent e) {
-						dateLabel2.setText(myDay.toString());
+						dateLabel2.setText(myDay.toString() + " ");
 					}
 					@Override
 					public void windowClosed(WindowEvent e) {
-						dateLabel2.setText(myDay.toString());
+						dateLabel2.setText(myDay.toString() + " ");
 					}
 					@Override
 					public void windowOpened(WindowEvent e) {}
@@ -168,7 +168,7 @@ public class MyFilter extends JPanel {
 		subPanel4.setBackground(COLOR);
 		
 		JLabel IDLabel = new JLabel("ID : ",SwingConstants.RIGHT);
-		IDLabel.setPreferredSize(new Dimension(jtextLenght,10));
+		IDLabel.setPreferredSize(new Dimension(jtextLenght, 14));
 		subPanel4.add(IDLabel, BorderLayout.WEST);
 		
 		IDTextField = new NumberTextField();
@@ -194,10 +194,7 @@ public class MyFilter extends JPanel {
 	}
 	
 	public void research() {
-		
-
 		TreeSet<EntertainmentEvent> eventList = new TreeSet<EntertainmentEvent>();
-		
 		
 		String choice = (String) filter.getSelectedItem();
 		if(choice.equals("All")) {
@@ -261,7 +258,7 @@ public class MyFilter extends JPanel {
 		for (EntertainmentEvent concert : eventList) {
 			JLabel lblCurrentConcert = new JLabel(concert.print());
 			myWindow.globalPanel.panel.add(lblCurrentConcert);
-			lblCurrentConcert.setFont(new Font("Dialog", Font.ITALIC, 10));
+			lblCurrentConcert.setFont(new Font("Dialog", Font.ITALIC, 14));
 		}
 		myWindow.globalPanel.panel.repaint();
 	}
@@ -271,19 +268,19 @@ public class MyFilter extends JPanel {
 		for (EntertainmentEvent concert : myWindow.rockEvents.eventList) {
 			JLabel lblCurrentConcert = new JLabel(concert.print());
 			myWindow.globalPanel.panel.add(lblCurrentConcert);
-			lblCurrentConcert.setFont(new Font("Dialog", Font.ITALIC, 10));
+			lblCurrentConcert.setFont(new Font("Dialog", Font.ITALIC, 14));
 		}
 		
 		for (EntertainmentEvent concert : myWindow.operaEvents.eventList) {
 			JLabel lblCurrentConcert = new JLabel(concert.print());
 			myWindow.globalPanel.panel.add(lblCurrentConcert);
-			lblCurrentConcert.setFont(new Font("Dialog", Font.ITALIC, 10));
+			lblCurrentConcert.setFont(new Font("Dialog", Font.ITALIC, 14));
 		}
 		
 		for (EntertainmentEvent concert : myWindow.theatreEvents.eventList) {
 			JLabel lblCurrentConcert = new JLabel(concert.print());
 			myWindow.globalPanel.panel.add(lblCurrentConcert);
-			lblCurrentConcert.setFont(new Font("Dialog", Font.ITALIC, 10));
+			lblCurrentConcert.setFont(new Font("Dialog", Font.ITALIC, 14));
 		}
 		myWindow.globalPanel.panel.repaint();
 	}

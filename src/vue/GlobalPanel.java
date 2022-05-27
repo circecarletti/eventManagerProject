@@ -32,11 +32,11 @@ public class GlobalPanel extends JPanel {
 		setBackground(new Color(171, 246, 173));
 		
 		myWindow = window;
-		TitledBorder titleList = new TitledBorder("Global event");
+		TitledBorder titleList = new TitledBorder("Planned events :");
 		setBorder(titleList);
-		titleList.setTitleFont(new Font("Dialog", Font.PLAIN, 12));
+		titleList.setTitleFont(new Font("Dialog", Font.PLAIN, 18));
 		panel = new JPanel();
-		panel.setBackground(Color.white);
+		panel.setBackground(new Color(171, 246, 173));
 		panel.setLayout(new GridLayout(0,1));
 		add(panel,BorderLayout.NORTH);
 		
@@ -44,7 +44,8 @@ public class GlobalPanel extends JPanel {
 		JComboBox<String> choiceOfEvent = new JComboBox<String>(events);
 		choiceOfEvent.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {			
+			public void actionPerformed(ActionEvent e) {
+				
 				
 				String choice = (String) choiceOfEvent.getSelectedItem();
 				if (choice.equals("All")) {
@@ -92,19 +93,19 @@ public class GlobalPanel extends JPanel {
 		for (EntertainmentEvent concert : myWindow.rockEvents.eventList) {
 			JLabel lblCurrentConcert = new JLabel(concert.print());
 			panel.add(lblCurrentConcert);
-			lblCurrentConcert.setFont(new Font("Dialog", Font.ITALIC, 10));
+			lblCurrentConcert.setFont(new Font("Dialog", Font.ITALIC, 14));
 		}
 		
 		for (EntertainmentEvent concert : myWindow.operaEvents.eventList) {
 			JLabel lblCurrentConcert = new JLabel(concert.print());
 			panel.add(lblCurrentConcert);
-			lblCurrentConcert.setFont(new Font("Dialog", Font.ITALIC, 10));
+			lblCurrentConcert.setFont(new Font("Dialog", Font.ITALIC, 14));
 		}
 		
 		for (EntertainmentEvent concert : myWindow.theatreEvents.eventList) {
 			JLabel lblCurrentConcert = new JLabel(concert.print());
 			panel.add(lblCurrentConcert);
-			lblCurrentConcert.setFont(new Font("Dialog", Font.ITALIC, 10));
+			lblCurrentConcert.setFont(new Font("Dialog", Font.ITALIC, 14));
 		}
 		panel.repaint();
 	}
@@ -114,7 +115,7 @@ public class GlobalPanel extends JPanel {
 		for (EntertainmentEvent concert : myWindow.rockEvents.eventList) {
 			JLabel lblCurrentConcert = new JLabel(concert.print(),SwingConstants.LEFT);
 			panel.add(lblCurrentConcert);
-			lblCurrentConcert.setFont(new Font("Dialog", Font.ITALIC, 10));
+			lblCurrentConcert.setFont(new Font("Dialog", Font.ITALIC, 14));
 		}
 		panel.repaint();
 	}
@@ -124,7 +125,7 @@ public class GlobalPanel extends JPanel {
 		for (EntertainmentEvent concert : myWindow.operaEvents.eventList) {
 			JLabel lblCurrentConcert = new JLabel(concert.print(),SwingConstants.LEFT);
 			panel.add(lblCurrentConcert);
-			lblCurrentConcert.setFont(new Font("Dialog", Font.ITALIC, 10));
+			lblCurrentConcert.setFont(new Font("Dialog", Font.ITALIC, 14));
 		}
 		panel.repaint();
 	}
@@ -134,7 +135,7 @@ public class GlobalPanel extends JPanel {
 		for (EntertainmentEvent concert : myWindow.theatreEvents.eventList) {
 			JLabel lblCurrentConcert = new JLabel(concert.print(),SwingConstants.LEFT);
 			panel.add(lblCurrentConcert);
-			lblCurrentConcert.setFont(new Font("Dialog", Font.ITALIC, 10));
+			lblCurrentConcert.setFont(new Font("Dialog", Font.ITALIC, 14));
 		}
 		panel.repaint();
 	}
@@ -145,7 +146,7 @@ public class GlobalPanel extends JPanel {
 			if(concert.date.dayIsEqual(date)) {
 				JLabel lblCurrentConcert = new JLabel(concert.print());
 				panel.add(lblCurrentConcert);
-				lblCurrentConcert.setFont(new Font("Dialog", Font.ITALIC, 10));
+				lblCurrentConcert.setFont(new Font("Dialog", Font.ITALIC, 14));
 			}
 				
 		}
@@ -154,7 +155,7 @@ public class GlobalPanel extends JPanel {
 			if(concert.date.dayIsEqual(date)) {
 				JLabel lblCurrentConcert = new JLabel(concert.print());
 				panel.add(lblCurrentConcert);
-				lblCurrentConcert.setFont(new Font("Dialog", Font.ITALIC, 10));
+				lblCurrentConcert.setFont(new Font("Dialog", Font.ITALIC, 14));
 			}
 		}
 		
@@ -162,7 +163,7 @@ public class GlobalPanel extends JPanel {
 			if(concert.date.dayIsEqual(date)) {
 				JLabel lblCurrentConcert = new JLabel(concert.print());
 				panel.add(lblCurrentConcert);
-				lblCurrentConcert.setFont(new Font("Dialog", Font.ITALIC, 10));
+				lblCurrentConcert.setFont(new Font("Dialog", Font.ITALIC, 14));
 			}
 		}
 		panel.repaint();

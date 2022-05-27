@@ -51,4 +51,12 @@ public class YearMonthPanel extends JPanel{
 		
 	}
 
+	public void setYear(int year) {
+		yearPanel.setYear(year);
+	}
+
+	public void setMonth(int month) {
+		monthPanel.setMonth(month);
+	}
+
 }

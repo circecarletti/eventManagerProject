@@ -21,7 +21,7 @@ public class YearPanel extends JPanel {
 	
 	private HomeMadeCalendar calendar;
 	
-	private static int year = 2022;
+	private int year;
 	
 	YearPanel(HomeMadeCalendar calendar){
 		setLayout(new BorderLayout());
@@ -102,6 +102,10 @@ public class YearPanel extends JPanel {
 	}
 	public void setCurrentYear() {
 		year = LocalDateTime.now().getYear();
+		
+	}
+	public void setYear(int year) {
+		this.year = year;
 		
 	}
 }

@@ -12,7 +12,7 @@ public class RockConcert extends EntertainmentEvent {
 	 * @param guitarist
 	 * @param name
 	 */
-	public RockConcert(MyDate date, int capacity, String drummer, String guitarist, String name) {
+	public RockConcert(MyDate date, String name, int capacity, String drummer, String guitarist) {
 		super(date, capacity, name);
 		this.drummer = drummer;
 		this.guitarist = guitarist;
@@ -27,7 +27,7 @@ public class RockConcert extends EntertainmentEvent {
 	}
 	
 	public String print() {
-		return "[RO]- " + name + ", " + date.toString();
+		return "(rock) " + name + ", " + date.toString();
 	}
 
 

@@ -22,7 +22,7 @@ public class Theatre extends EntertainmentEvent{
 	}
 	
 	public String print() {
-		return "[TH]- " + name + ", " + date.toString();
+		return "(theatre) " + name + ", " + date.toString();
 	}
 
 

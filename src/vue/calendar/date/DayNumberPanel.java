@@ -14,7 +14,7 @@ import vue.calendar.HomeMadeCalendar;
 public class DayNumberPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
-	private int day = 1;
+	private int day;
 	
 	private HomeMadeCalendar calendar;
 	
@@ -70,5 +70,9 @@ public class DayNumberPanel extends JPanel {
 	public void setCurrentDay() {
 		day = LocalDateTime.now().getDayOfMonth();
 		
+	}
+
+	public void setDay(int day) {
+		this.day = day;
 	}
 }
